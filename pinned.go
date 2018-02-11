@@ -8,9 +8,12 @@ import (
 	"time"
 )
 
-// Errors.
 var (
-	ErrInvalidVersion    = errors.New("invalid version")
+	// ErrInvalidVersion means the version supplied is not included
+	// in the versions supplied to the VersionManager or it is malformed.
+	ErrInvalidVersion = errors.New("invalid version")
+
+	// ErrNoVersionSupplied means no version was supplied.
 	ErrNoVersionSupplied = errors.New("no version supplied")
 )
 
@@ -54,9 +57,9 @@ func (vm *VersionManager) Latest() *Version {
 	return vm.versions[0]
 }
 
-// Parse evaluates an http.Request object to
-// determine an API version. It inspects the query parameters
-// and request headers. Whichever is most recent wins.
+// Parse evaluates an http.Request object to determine an API version.
+// It inspects the query parameters and request headers. Whichever
+// is most recent is the version to use.
 func (vm *VersionManager) Parse(r *http.Request) (*Version, error) {
 	h := r.Header.Get(vm.header())
 	q := r.URL.Query().Get(vm.query())
@@ -101,6 +104,11 @@ func (vm *VersionManager) getVersionByTime(t time.Time) (*Version, error) {
 
 // Apply processes a Versionable object by applying all changes between the
 // latest version and the version requested. The altered object is returned.
+//
+// Concretely, if the supplied version is two versions behind the latest, the changes
+// in those two versions are applied sequentially to the object. This essentially
+// "undoes" the changes made to the API so that the object is structured according to
+// the specified version.
 func (vm *VersionManager) Apply(version *Version, obj Versionable) (map[string]interface{}, error) {
 	data := obj.Data()
 
@@ -110,12 +118,16 @@ func (vm *VersionManager) Apply(version *Version, obj Versionable) (map[string]i
 			break
 		}
 
-		// Otherwise, apply changes as necessary.
+		// Iterate through each change and execute
+		// actions as appropriate.
 		for _, c := range v.Changes {
 			typ := reflect.TypeOf(obj).Elem().Name()
-			f, ok := c.Actions[typ]
+
+			// If there is an action for this obj type
+			// execute the action.
+			a, ok := c.Actions[typ]
 			if ok {
-				data = f(data)
+				data = a(data)
 			}
 		}
 	}
