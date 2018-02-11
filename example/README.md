@@ -5,8 +5,8 @@ This is an example API that uses `pinned` to manage versions.
 In this example, the API maintains three versions.
 
 ```
-2018-03-09 - User.FullName -> User.Name
-2018-02-09 - Remove User.CreatedAt
+2018-03-09 - Rename User.FullName -> User.Name
+2018-02-09 - Add User.CreatedAt
 2018-01-09 - Initial.
 ```
 
