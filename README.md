@@ -25,9 +25,9 @@ This `Action` is a `func` that _reverses the change_ made in the new version.
 
 ```go
 func userNameFieldChange(mapping map[string]interface{}) map[string]interface{} {
-	mapping["full_name"] = mapping["name"]
-	delete(mapping, "name")
-	return mapping
+  mapping["full_name"] = mapping["name"]
+  delete(mapping, "name")
+  return mapping
 }
 ```
 
