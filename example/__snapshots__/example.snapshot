@@ -1,0 +1,46 @@
+/* snapshot: TestGetUsersHandler-/users */
+HTTP/1.1 200 OK
+Connection: close
+Content-Type: application/json
+
+{
+  "created_at": 1257894000,
+  "email": "foo@bar.com",
+  "id": 1,
+  "name": "foo"
+}
+
+/* snapshot: TestGetUsersHandler-/users?v=2018-01-09 */
+HTTP/1.1 200 OK
+Connection: close
+Content-Type: application/json
+
+{
+  "email": "foo@bar.com",
+  "full_name": "foo",
+  "id": 1
+}
+
+/* snapshot: TestGetUsersHandler-/users?v=2018-02-09 */
+HTTP/1.1 200 OK
+Connection: close
+Content-Type: application/json
+
+{
+  "created_at": 1257894000,
+  "email": "foo@bar.com",
+  "full_name": "foo",
+  "id": 1
+}
+
+/* snapshot: TestGetUsersHandler-/users?v=2018-03-09 */
+HTTP/1.1 200 OK
+Connection: close
+Content-Type: application/json
+
+{
+  "created_at": 1257894000,
+  "email": "foo@bar.com",
+  "id": 1,
+  "name": "foo"
+}
