@@ -31,6 +31,8 @@ func ExampleVersion() {
 		Changes: []*pinned.Change{
 			&pinned.Change{
 				Description: "Renames `user.full_name` to `user.name`",
+				// Actions are executed by type. In this example "User"
+				// references any object of type User.
 				Actions: map[string]pinned.Action{
 					"User": userNameFieldChange,
 				},

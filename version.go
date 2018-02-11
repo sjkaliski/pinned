@@ -27,8 +27,12 @@ func (vs versions) Less(i, j int) bool { return vs[i].date.Before(vs[j].date) }
 // Change represents a backwards-incompatible change and the actions
 // required to make it compatible.
 type Change struct {
+	// Description of the change made. Used for documentation.
 	Description string
-	Actions     map[string]Action
+
+	// Actions are a map of object type to Action. The object type
+	// is determined using the reflect pkg.
+	Actions map[string]Action
 }
 
 // Action represents an action to take on a object in order to make
