@@ -37,4 +37,62 @@ As versions are added, these changes are sequentially undone. This enables a ver
 
 ## Usage
 
-See the included [example](/example) project for sample usage.
+See the included [example](/example) project for detailed usage.
+
+Versioning is done at a resource/struct level. If a type implements `Versionable` it can take advantage of this package.
+
+1. To start, create a new `VersionManager`.
+
+```go
+vm := &pinned.VersionManager{
+  Layout: "2006-01-02",
+  Header: "API Version",
+}
+```
+
+2. Then add `Versions`.
+
+```go
+// Initial version.
+vm.Add(&pinned.Version{
+  Date: "2018-02-10",
+})
+
+// New version.
+vm.Add(&pinned.Version{
+  Date: "2018-02-11",
+  Changes: []*pinned.Change{
+    &pinned.Change{
+      Description: "New things",
+      Actions: map[string]pinned.Action{
+        "Object": someMethod,
+      }
+    }
+  }
+})
+```
+
+`someMethod` is applied to all `type Object`, and has the signature `func(map[string]interface{}) map[string]interface{}`. 
+
+3. Handle an incoming request.
+
+```go
+func handler(w http.ResponseWriter, r *http.Request) {
+  // Get version from request.
+  v, _ := vm.Parse(r)
+
+  // ...Fetch resources...
+
+  // Apply version changes to resources.
+  body, _ := vm.Apply(v, data)
+
+  // Write response.
+  data, err := json.Marshal(body)
+  if err != nil {
+    panic(err)
+  }
+
+  w.Header().Set("Content-Type", "application/json")
+  w.Write(data)
+}
+```
