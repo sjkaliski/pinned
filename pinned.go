@@ -51,7 +51,7 @@ func (vm *VersionManager) Add(v *Version) error {
 // Latest returns the most current active version.
 func (vm *VersionManager) Latest() *Version {
 	if len(vm.versions) == 0 {
-		return &Version{}
+		return nil
 	}
 
 	return vm.versions[0]
