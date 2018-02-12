@@ -31,6 +31,22 @@ func TestVersionManagerAdd(t *testing.T) {
 	}
 }
 
+func TestVersionManagerLatest(t *testing.T) {
+	vm := &VersionManager{}
+
+	vm.Add(&Version{
+		Date: "2017-01-02",
+	})
+	vm.Add(&Version{
+		Date: "2018-01-02",
+	})
+
+	v := vm.Latest()
+	if v.Date != "2018-01-02" {
+		t.Fatalf("Expected 2018-01-02, instead got %s", v.Date)
+	}
+}
+
 func TestVersionManagerParse(t *testing.T) {
 	vm := &VersionManager{}
 
