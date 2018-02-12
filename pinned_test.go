@@ -114,3 +114,51 @@ func TestVersionManagerParse(t *testing.T) {
 		t.Fatalf("Expected version 2018-01-02, instead got %s", v.Date)
 	}
 }
+
+type TestObject struct {
+	B string
+}
+
+func (to *TestObject) Data() map[string]interface{} {
+	return map[string]interface{}{
+		"B": to.B,
+	}
+}
+
+func TestVersionManagerApply(t *testing.T) {
+	vm := &VersionManager{}
+
+	action := func(m map[string]interface{}) map[string]interface{} {
+		m["A"] = m["B"]
+		delete(m, "B")
+		return m
+	}
+
+	version := &Version{
+		Date: "2017-01-02",
+	}
+	vm.Add(version)
+
+	vm.Add(&Version{
+		Date: "2018-01-02",
+		Changes: []*Change{
+			&Change{
+				Description: "Foobar.",
+				Actions: map[string]Action{
+					"TestObject": action,
+				},
+			},
+		},
+	})
+
+	to := &TestObject{"Foo"}
+
+	res, err := vm.Apply(version, to)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if res["A"].(string) != "Foo" {
+		t.Fatalf("Expected map[A] = Foo, instead got %s", res["A"].(string))
+	}
+}
