@@ -2,6 +2,7 @@ package pinned
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -34,6 +35,12 @@ func TestVersionManagerAdd(t *testing.T) {
 func TestVersionManagerLatest(t *testing.T) {
 	vm := &VersionManager{}
 
+	// If no versions, return nil Version.
+	v := vm.Latest()
+	if v != nil {
+		log.Fatal("Expected nil Version")
+	}
+
 	vm.Add(&Version{
 		Date: "2017-01-02",
 	})
@@ -41,7 +48,7 @@ func TestVersionManagerLatest(t *testing.T) {
 		Date: "2018-01-02",
 	})
 
-	v := vm.Latest()
+	v = vm.Latest()
 	if v.Date != "2018-01-02" {
 		t.Fatalf("Expected 2018-01-02, instead got %s", v.Date)
 	}
