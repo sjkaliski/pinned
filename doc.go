@@ -1,2 +1,2 @@
-// Package pinned is a proof-of-concept, date based versioning system for JSON APIs.
+// Package pinned is a proof-of-concept, date based versioning system for Go APIs.
 package pinned
