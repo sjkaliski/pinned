@@ -2,6 +2,9 @@
 
 This is a proof-of-concept, date based versioning system for JSON APIs inspired by [Stripe's API versioning](https://stripe.com/blog/api-versioning).
 
+[![Build Status](https://travis-ci.org/sjkaliski/pinned.png)](https://travis-ci.org/sjkaliski/pinned)
+[![GoDoc](https://godoc.org/github.com/sjkaliski/pinned?status.svg)](https://godoc.org/github.com/sjkaliski/pinned)
+
 ## Overview
 
 This package enables reverse compatibility for a Go API by defining versions and their associated changes. Consequently, API versions can be maintained for long periods of time without minimal effort.
