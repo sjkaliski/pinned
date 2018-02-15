@@ -55,6 +55,9 @@ func handler(w http.ResponseWriter, r *http.Request) {
   // Get version from request.
   v, _ := vm.Parse(r)
 
+  // Set version in context.
+  ctx = pinned.NewContext(r.Context(), v)
+  
   // ...Fetch resources...
 
   // Apply version changes to resources.
