@@ -66,9 +66,10 @@ func TestVersionManagerParse(t *testing.T) {
 	}
 
 	// Should fail if no version supplied.
-	vm.Add(&Version{
+	oldV := &Version{
 		Date: "2017-01-02",
-	})
+	}
+	vm.Add(oldV)
 
 	req := httptest.NewRequest(http.MethodGet, getRoute(""), nil)
 	_, err := vm.Parse(req)
@@ -107,9 +108,10 @@ func TestVersionManagerParse(t *testing.T) {
 	}
 
 	// Should select more recent version if supplied in query params and header.
-	vm.Add(&Version{
+	newV := &Version{
 		Date: "2018-01-02",
-	})
+	}
+	vm.Add(newV)
 
 	req = httptest.NewRequest(http.MethodGet, getRoute("2017-01-02"), nil)
 	req.Header.Set("Version", "2018-01-02")
@@ -119,6 +121,14 @@ func TestVersionManagerParse(t *testing.T) {
 	}
 	if v.Date != "2018-01-02" {
 		t.Fatalf("Expected version 2018-01-02, instead got %s", v.Date)
+	}
+
+	// Should fail if version is deprecated.
+	oldV.Deprecated = true
+	req = httptest.NewRequest(http.MethodGet, getRoute("2017-01-02"), nil)
+	_, err = vm.Parse(req)
+	if err != ErrVersionDeprecated {
+		t.Fatalf("Expected ErrVersionDeprecated, instead got %s", err)
 	}
 }
 
