@@ -7,8 +7,9 @@ import (
 // Version represents a version change. It is pinned to a specific time.
 // It contains a list of Changes. Changes are executed in-order.
 type Version struct {
-	Date    string
-	Changes []*Change
+	Date       string
+	Changes    []*Change
+	Deprecated bool
 
 	date   time.Time
 	layout string

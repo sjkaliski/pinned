@@ -15,6 +15,9 @@ var (
 
 	// ErrNoVersionSupplied means no version was supplied.
 	ErrNoVersionSupplied = errors.New("no version supplied")
+
+	// ErrVersionDeprecated means the version is deprecated.
+	ErrVersionDeprecated = errors.New("version is deprecated")
 )
 
 const (
@@ -89,7 +92,14 @@ func (vm *VersionManager) Parse(r *http.Request) (*Version, error) {
 		t = qDate
 	}
 
-	return vm.getVersionByTime(t)
+	v, err := vm.getVersionByTime(t)
+	if err != nil {
+		return nil, err
+	}
+	if v.Deprecated {
+		return v, ErrVersionDeprecated
+	}
+	return v, nil
 }
 
 func (vm *VersionManager) getVersionByTime(t time.Time) (*Version, error) {
