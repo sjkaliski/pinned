@@ -1,6 +1,6 @@
 # pinned
 
-This is a proof-of-concept, date based versioning system for JSON APIs inspired by [Stripe's API versioning](https://stripe.com/blog/api-versioning).
+This is a proof-of-concept, date based versioning system for APIs inspired by [Stripe's API versioning](https://stripe.com/blog/api-versioning).
 
 [![Build Status](https://travis-ci.org/sjkaliski/pinned.png)](https://travis-ci.org/sjkaliski/pinned)
 [![GoDoc](https://godoc.org/github.com/sjkaliski/pinned?status.svg)](https://godoc.org/github.com/sjkaliski/pinned)
