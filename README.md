@@ -1,5 +1,7 @@
 # pinned
 
+[![Join the chat at https://gitter.im/sjkaliski-pinned/Lobby](https://badges.gitter.im/sjkaliski-pinned/Lobby.svg)](https://gitter.im/sjkaliski-pinned/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 This is a proof-of-concept, date based versioning system for APIs inspired by [Stripe's API versioning](https://stripe.com/blog/api-versioning).
 
 [![Build Status](https://travis-ci.org/sjkaliski/pinned.png)](https://travis-ci.org/sjkaliski/pinned)
