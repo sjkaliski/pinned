@@ -159,7 +159,7 @@ func TestVersionManagerApply(t *testing.T) {
 	vm.Add(&Version{
 		Date: "2018-01-02",
 		Changes: []*Change{
-			&Change{
+			{
 				Description: "Foobar.",
 				Actions: map[string]Action{
 					"TestObject": action,

@@ -12,7 +12,7 @@ func init() {
 	vm.Add(&pinned.Version{
 		Date: "2018-03-09",
 		Changes: []*pinned.Change{
-			&pinned.Change{
+			{
 				Description: "Renames `user.full_name` to `user.name`",
 				Actions: map[string]pinned.Action{
 					"User": userNameFieldChange,
@@ -24,7 +24,7 @@ func init() {
 	vm.Add(&pinned.Version{
 		Date: "2018-02-09",
 		Changes: []*pinned.Change{
-			&pinned.Change{
+			{
 				Description: "Added `user.created_at`",
 				Actions: map[string]pinned.Action{
 					"User": userCreatedAtChange,

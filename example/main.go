@@ -9,7 +9,7 @@ import (
 
 var (
 	users = []*User{
-		&User{
+		{
 			ID:        1,
 			Email:     "foo@bar.com",
 			Name:      "foo",
