@@ -19,7 +19,7 @@ func (v *Version) String() string {
 	return v.date.Format(v.layout)
 }
 
-type versions             []*Version
+type versions []*Version
 
 func (vs versions) Len() int           { return len(vs) }
 func (vs versions) Swap(i, j int)      { vs[i], vs[j] = vs[j], vs[i] }
