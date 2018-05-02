@@ -5,10 +5,13 @@ go:
   - master
 
 install:
+  - go get -u golang.org/x/lint/golint
   - go get -t -v ./...
 
 script:
   - go test -v -race ./...
+  - go vet ./...
+  - golint -set_exit_status ./...
 
 notifications:
   email: false
