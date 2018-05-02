@@ -2,7 +2,12 @@ language: go
 go:
   - 1.8.x
   - 1.9.x
-  - master
+  - 1.10.x
+  - tip
+
+matrix:
+  allow_failures:
+    - go: tip
 
 install:
   - go get -u golang.org/x/lint/golint
