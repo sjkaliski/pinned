@@ -1,5 +1,6 @@
 package main
 
+// User is a user.
 type User struct {
 	ID        uint64
 	Email     string
@@ -7,6 +8,7 @@ type User struct {
 	CreatedAt int64
 }
 
+// Data implements the pinned.Versionable interface.
 func (u *User) Data() map[string]interface{} {
 	return map[string]interface{}{
 		"id":         u.ID,
