@@ -5,7 +5,7 @@ This is a proof-of-concept, date based versioning system for APIs inspired by [S
 [![Build Status](https://travis-ci.org/sjkaliski/pinned.png)](https://travis-ci.org/sjkaliski/pinned)
 [![GoDoc](https://godoc.org/github.com/sjkaliski/pinned?status.svg)](https://godoc.org/github.com/sjkaliski/pinned)
 [![Go Report Card](https://goreportcard.com/badge/github.com/sjkaliski/pinned)](https://goreportcard.com/report/github.com/sjkaliski/pinned)
-[![Join the community on Spectrum](https://withspectrum.github.io/badge/badge.svg)](https://spectrum.chat/<mycommunity>)
+[![Join the community on Spectrum](https://withspectrum.github.io/badge/badge.svg)](https://spectrum.chat/pinned)
 
 ## Overview
 
