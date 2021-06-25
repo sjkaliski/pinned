@@ -9,7 +9,7 @@ This is a proof-of-concept, date based versioning system for APIs inspired by [S
 
 ## Overview
 
-This package enables reverse compatibility for a Go API by defining versions and their associated changes. Consequently, API versions can be maintained for long periods of time without minimal effort.
+This package enables reverse compatibility for a Go API by defining versions and their associated changes. Consequently, API versions can be maintained for long periods of time with minimal effort.
 
 ## Usage
 
